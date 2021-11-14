@@ -1,4 +1,5 @@
 import React from "react";
+import Loader from "../components/Loader";
 import Movies from "../components/Movies";
 
 export default class Main extends React.Component {
@@ -15,7 +16,11 @@ export default class Main extends React.Component {
   render() {
     return (
       <div className="container content">
-        <Movies movies={this.state.movies} />
+        {this.state.movies.length ? (
+          <Movies movies={this.state.movies} />
+        ) : (
+          <Loader />
+        )}
       </div>
     );
   }
