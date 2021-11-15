@@ -14,10 +14,15 @@ export default class Main extends React.Component {
       .then((data) => this.setState({ movies: data.Search }));
   }
 
-  searchMovies = (str) => {
-    fetch(`http://www.omdbapi.com/?apikey=329ffa13&s=${str}`)
+  searchMovies = (str, type = "all") => {
+    this.setState({ loading: true });
+    fetch(
+      `https://www.omdbapi.com/?apikey=329ffa13&s=${str}${
+        type !== "all" ? `&type=${type}` : ""
+      }`
+    )
       .then((response) => response.json())
-      .then((data) => this.setState({ movies: data.Search }));
+      .then((data) => this.setState({ movies: data.Search, loading: false }));
   };
 
   render() {
